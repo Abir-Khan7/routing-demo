@@ -2,7 +2,7 @@
 
 @switch (viewMode) {
     @case ("DEPARTMENT_LIST") {
-        <app-department-list (departmentSelected)="handleSelectedDepartment($event)"></app-department-list>
+        <app-department-list [departments]="departments" (departmentSelected)="handleSelectedDepartment($event)"></app-department-list>
     }
     @case ("DEPARTMENT_DETAIL") {
         <app-department-detail [department]="selectedDepartment" (close)="closeDepartmentDetail()" (goToPrev)="goToPreviousDepartment()" (goToOverview)="goToDepartmentOverview()"></app-department-detail>
