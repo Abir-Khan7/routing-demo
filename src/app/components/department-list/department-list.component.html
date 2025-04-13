@@ -1,0 +1,9 @@
+<h3>Department List</h3>
+
+<ul>
+    @for (department of departments; track $index) {
+    <li (click)="onSelect(department)" [class.selected]="isSelected(department)">
+        <span>{{department.id}}</span> {{department.name}}
+    </li>
+    }
+</ul>
