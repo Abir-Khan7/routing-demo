@@ -40,3 +40,6 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Lol why wasn't this in the gitignore template lmfao I almost committed my .env file
+.env

@@ -1,0 +1,10 @@
+<h3>You selected department number {{department?.id}}</h3>
+<h2>{{department?.name}}</h2>
+<p>
+    <button (click)="showOverview()">Overview</button>
+    <button (click)="showContact()">Contact</button>
+</p>
+<a (click)="goPrevious()">Prev </a>
+<a (click)="goNext()">Next</a>
+
+<button (click)="goToDepartments()">Back</button>
