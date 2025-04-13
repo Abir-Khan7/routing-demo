@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {
+  HttpClient,
+  HttpErrorResponse
+} from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { Department } from '../../../model/Department';
 import { DepartmentDetailComponent } from '../../department-detail/department-detail.component';
 import {
@@ -17,13 +21,30 @@ import { DepartmentOverviewComponent } from '../../department-overview/departmen
   templateUrl: './single-page.component.html',
   styleUrl: './single-page.component.css',
 })
-export class SinglePageComponent {
-  viewMode: 'DEPARTMENT_LIST' | 'DEPARTMENT_DETAIL' | 'DEPARTMENT_OVERVIEW' = 'DEPARTMENT_LIST';
+export class SinglePageComponent implements OnInit {
+  viewMode: 'DEPARTMENT_LIST' | 'DEPARTMENT_DETAIL' | 'DEPARTMENT_OVERVIEW' =
+    'DEPARTMENT_LIST';
   selectedDepartment!: Department | null;
+  departments!: Department[];
   selectedDepartmentId = 0;
 
-  constructor() {}
-  
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    let depts: any;
+    this.http
+      .get('http://localhost:4300/departments/department-list')
+      .subscribe({
+        next: (result) => {
+          depts = result;
+          this.departments = depts;
+        },
+        error: (error: HttpErrorResponse) => {
+          console.log(`Error getting departments: ${error}`);
+        },
+      });
+  }
+
   handleSelectedDepartment(event: DepartmentSelectEvent) {
     this.selectedDepartment = event.department;
     this.selectedDepartmentId = this.selectedDepartment.id;
